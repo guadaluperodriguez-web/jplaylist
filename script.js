@@ -1,271 +1,51 @@
-// ✿ playlist for someone special ✿
+// ✿ a playlist for someone special ✿
 // "Did my heart love till now? Forswear it, sight! For I ne'er saw true beauty till this night." — W. Shakespeare
-
-const CLIENT_ID   = '468b70e8b6864bddac9fdf9405afcbf9';
-const CLIENT_SECRET = '6e91ed9239354b33aa08ab39a406a7f5';
-const PLAYLIST_ID = '1quqeV4Flj7Vnu5cmVWD47';
-
-let tracks       = [];
+ 
+const TRACKS = [
+  { id: "5xw2cHVLw1rlDPp3cL9Zuv", name: "She's Thunderstorms",                          artist: "Arctic Monkeys",              cover: "https://i.scdn.co/image/ab67616d00004851cb44038b22f3d8a5e4e62d5a" },
+  { id: "7LbUv7w2z7rEbNqp1uIL9U", name: "Fallingforyou",                                artist: "The 1975",                    cover: "https://i.scdn.co/image/ab67616d00004851592889d4d323785856f18770" },
+  { id: "254bXAqt3zP6P50BdQvEsq", name: "Everywhere (2017 Remaster)",                   artist: "Fleetwood Mac",               cover: "https://i.scdn.co/image/ab67616d00004851aaba065944cd82a6f15c86b6" },
+  { id: "3SWGtKHaCFEUqfm9ydUFVw", name: "Disaster",                                     artist: "Conan Gray",                  cover: "https://i.scdn.co/image/ab67616d0000485160a89b781c62ffe2136e4396" },
+  { id: "45S5WTQEGOB1VHr1Q4FuPl", name: "Golden",                                       artist: "Harry Styles",                cover: "https://i.scdn.co/image/ab67616d000048519c72b249fcaa04d074c1dfcd" },
+  { id: "4QlzkaRHtU8gAdwqjWmO8n", name: "Friday I'm In Love",                          artist: "The Cure",                    cover: "https://i.scdn.co/image/ab67616d000048514ae1c4c5c45aabe565499163" },
+  { id: "5XeFesFbtLpXzIVDNQP22n", name: "I Wanna Be Yours",                             artist: "Arctic Monkeys",              cover: "https://i.scdn.co/image/ab67616d00004851bb54dde68cd23e2a268ae0f5" },
+  { id: "0A1JLUlkZkp2EFrosoNQi0", name: "Labyrinth",                                    artist: "Taylor Swift",                cover: "https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
+  { id: "4e3ZNTAV6PCrdYMUrUlMpQ", name: "Electric Touch (feat. Fall Out Boy)",          artist: "Taylor Swift, Fall Out Boy",  cover: "https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
+  { id: "3MytWN8L7shNYzGl4tAKRp", name: "Sparks Fly (Taylor's Version)",                artist: "Taylor Swift",                cover: "https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
+  { id: "0gZGUAO42F1HmzZWHNPGAu", name: "Risk",                                         artist: "Gracie Abrams",               cover: "https://i.scdn.co/image/ab67616d000048516e2101520787791370f4a96b" },
+  { id: "4zmKGsrXjLmljb5fTaBTot", name: "Snow On The Beach (feat. Lana Del Rey)",       artist: "Taylor Swift, Lana Del Rey",  cover: "https://i.scdn.co/image/ab67616d00004851fa747621a53c8e2cc436dee0" },
+  { id: "5TTGoX70AFrTvuEtqHK37S", name: "No. 1 Party Anthem",                           artist: "Arctic Monkeys",              cover: "https://i.scdn.co/image/ab67616d000048514ae1c4c5c45aabe565499163" },
+  { id: "5xA5MggKc3aQxuOzNzPUWB", name: "Apple Cider",                                  artist: "beabadoobee",                 cover: "https://i.scdn.co/image/ab67616d00004851ceca3ef39ab8f9b59acff394" },
+  { id: "3bnVBN67NBEzedqQuWrpP4", name: "Tear in My Heart",                             artist: "Twenty One Pilots",           cover: "https://i.scdn.co/image/ab67616d000048512df0d98a423025032d0db1f7" },
+  { id: "70L6nHORQsblY813yNqUR3", name: "Cherry Waves",                                 artist: "Deftones",                    cover: "https://i.scdn.co/image/ab67616d00004851c869fa3b4e0ce4dd9818a40e" },
+  { id: "0pfpeTGQOWlGp6YUUbBD42", name: "Bewitched",                                    artist: "Laufey",                      cover: "https://i.scdn.co/image/ab67616d0000485174c732f8aa0e0ccbb3d17d96" },
+  { id: "77sMIMlNaSURUAXq5coCxE", name: "Fearless (Taylor's Version)",                  artist: "Taylor Swift",                cover: "https://i.scdn.co/image/ab67616d00004851a48964b5d9a3d6968ae3e0de" },
+  { id: "55mQhobuwtY7lfLAXylg1k", name: "You Make Loving Fun (2004 Remaster)",          artist: "Fleetwood Mac",               cover: "https://i.scdn.co/image/ab67616d00004851e52a59a28efa4773dd2bfe1b" },
+  { id: "7Mts0OfPorF4iwOomvfqn1", name: "So High School",                               artist: "Taylor Swift",                cover: "https://i.scdn.co/image/ab67616d000048518ecc33f195df6aa257c39eaa" },
+  { id: "3yNJkriPzWjkkDAWHIAVUq", name: "Ours (Taylor's Version)",                      artist: "Taylor Swift",                cover: "https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
+  { id: "6jgkEbmQ2F2onEqsEhiliL", name: "My Kind of Woman",                             artist: "Mac DeMarco",                 cover: "https://i.scdn.co/image/ab67616d000048519d377496c6bc8724b521222d" },
+  { id: "7I1kle4TNmkfednJDKo8GR", name: "If You Want To",                               artist: "beabadoobee",                 cover: "https://i.scdn.co/image/ab67616d00004851fe11583497b2a332995b88ed" },
+  { id: "2eAvDnpXP5W0cVtiI0PUxV", name: "Dandelions",                                   artist: "Ruth B.",                     cover: "https://i.scdn.co/image/ab67616d00004851b09403f05bc0c306cf96990f" },
+  { id: "4THoSHxiabL1rd59iVWu2T", name: "Cold Coffee",                                  artist: "Ed Sheeran",                  cover: "https://i.scdn.co/image/ab67616d000048512fec3ad10ab2f3a637e7a127" }
+];
+ 
 let currentIndex = 0;
 let isPlaying    = false;
-let token        = null;
-let iframeReady  = false;
-
-// DOM refs
-const carousel     = document.getElementById('carousel');
-const npTitle      = document.getElementById('npTitle');
-const npArtist     = document.getElementById('npArtist');
-const tracklist    = document.getElementById('tracklist');
-const loadingMsg   = document.getElementById('tracklistLoading');
-const embedWrap    = document.getElementById('spotifyEmbed');
-const playBtn      = document.getElementById('playBtn');
-const playIcon     = document.getElementById('playIcon');
-const prevBtn      = document.getElementById('prevBtn');
-const nextBtn      = document.getElementById('nextBtn');
-const prevTrackBtn = document.getElementById('prevTrackBtn');
-const nextTrackBtn = document.getElementById('nextTrackBtn');
-const blob1        = document.getElementById('blob1');
-const blob2        = document.getElementById('blob2');
-const blob3        = document.getElementById('blob3');
-const tabListen    = document.getElementById('tabListen');
-const tabSongs     = document.getElementById('tabSongs');
-const panelSongs   = document.getElementById('panelSongs');
-
-// ── SVG icons
-const PLAY_SVG  = `<path d="M8 5v14l11-7z"/>`;
-const PAUSE_SVG = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
-
-// ── 1. Spotify token
-async function getToken() {
-  const res = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET)
-    },
-    body: 'grant_type=client_credentials'
-  });
-  const data = await res.json();
-  return data.access_token;
-}
-
-// ── 2. Load playlist
-async function loadPlaylist() {
-  try {
-    token = await getToken();
-    const res = await fetch(
-      `https://api.spotify.com/v1/playlists/${PLAYLIST_ID}?fields=tracks.items(track(name,artists,album(name,images),id))`,
-      { headers: { Authorization: 'Bearer ' + token } }
-    );
-    const data = await res.json();
-    tracks = data.tracks.items
-      .filter(i => i.track && i.track.id)
-      .map(i => ({
-        id:     i.track.id,
-        name:   i.track.name,
-        artist: i.track.artists.map(a => a.name).join(', '),
-        cover:  i.track.album.images[0]?.url || ''
-      }));
-
-    loadingMsg.style.display = 'none';
-    buildCarousel();
-    renderTracklist();
-    loadTrack(0, false);
-  } catch (e) {
-    loadingMsg.textContent = 'could not load songs 🌸';
-    console.error(e);
-  }
-}
-
-// ── 3. Build carousel cards
-function buildCarousel() {
-  carousel.innerHTML = '';
-  tracks.forEach((t, i) => {
-    const card = document.createElement('div');
-    card.className = 'album-card';
-    card.dataset.index = i;
-    const img = document.createElement('img');
-    img.src = t.cover;
-    img.alt = t.name;
-    img.loading = 'lazy';
-    card.appendChild(img);
-    card.addEventListener('click', () => {
-      if (i === currentIndex) {
-        togglePlay();
-      } else {
-        loadTrack(i, true);
-      }
-    });
-    carousel.appendChild(card);
-  });
-  updateCarousel();
-}
-
-// ── 4. Update card positions
-function updateCarousel() {
-  const cards = carousel.querySelectorAll('.album-card');
-  const n = tracks.length;
-  cards.forEach(card => {
-    const i = parseInt(card.dataset.index);
-    const diff = ((i - currentIndex) % n + n) % n;
-    const signed = diff > n / 2 ? diff - n : diff;
-
-    let pos = 'hidden';
-    if (signed === 0)  pos = 'center';
-    else if (signed === -1) pos = 'left1';
-    else if (signed === -2) pos = 'left2';
-    else if (signed === 1)  pos = 'right1';
-    else if (signed === 2)  pos = 'right2';
-
-    card.dataset.pos = pos;
-  });
-}
-
-// ── 5. Load track
-function loadTrack(index, autoplay) {
-  currentIndex = index;
-  const t = tracks[index];
-  if (!t) return;
-
-  npTitle.textContent  = t.name;
-  npArtist.textContent = t.artist;
-
-  updateCarousel();
-  highlightTracklist();
-
-  // Update ambient color from album art
-  extractAndApplyColor(t.cover);
-
-  // Build spotify embed
-  iframeReady = false;
-  embedWrap.innerHTML = `
-    <iframe
-      id="spotifyIframe"
-      src="https://open.spotify.com/embed/track/${t.id}?utm_source=generator&theme=0&autoplay=${autoplay ? 1 : 0}"
-      width="300" height="80"
-      frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy">
-    </iframe>
-  `;
-
-  if (autoplay) {
-    isPlaying = true;
-  } else {
-    isPlaying = false;
-  }
-  updatePlayUI();
-}
-
-// ── 6. Ambient color extraction via canvas
-function extractAndApplyColor(imgUrl) {
-  const img = new Image();
-  img.crossOrigin = 'Anonymous';
-  img.onload = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 10;
-    canvas.height = 10;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, 10, 10);
-    const data = ctx.getImageData(0, 0, 10, 10).data;
-    let r = 0, g = 0, b = 0, count = 0;
-    for (let i = 0; i < data.length; i += 4) {
-      r += data[i];
-      g += data[i + 1];
-      b += data[i + 2];
-      count++;
-    }
-    r = Math.floor(r / count);
-    g = Math.floor(g / count);
-    b = Math.floor(b / count);
-
-    // Derive 3 blob colors from the dominant hue
-    const h = rgbToHsl(r, g, b)[0];
-    const c1 = hslToRgb(h,        0.7, 0.45);
-    const c2 = hslToRgb((h + 40) % 360, 0.6, 0.38);
-    const c3 = hslToRgb((h + 200) % 360, 0.5, 0.42);
-
-    blob1.style.background = `rgb(${c1.join(',')})`;
-    blob2.style.background = `rgb(${c2.join(',')})`;
-    blob3.style.background = `rgb(${c3.join(',')})`;
-  };
-  img.onerror = () => {
-    // fallback to default colors
-    blob1.style.background = '#c45c7a';
-    blob2.style.background = '#7c5cbf';
-    blob3.style.background = '#5c8fcf';
-  };
-  img.src = imgUrl;
-}
-
-function rgbToHsl(r, g, b) {
-  r /= 255; g /= 255; b /= 255;
-  const max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h, s, l = (max + min) / 2;
-  if (max === min) { h = s = 0; }
-  else {
-    const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    switch (max) {
-      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-      case g: h = ((b - r) / d + 2) / 6; break;
-      case b: h = ((r - g) / d + 4) / 6; break;
-    }
-  }
-  return [h * 360, s, l];
-}
-
-function hslToRgb(h, s, l) {
-  h /= 360;
-  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-  const p = 2 * l - q;
-  return [hue2rgb(p, q, h + 1/3), hue2rgb(p, q, h), hue2rgb(p, q, h - 1/3)].map(v => Math.round(v * 255));
-}
-function hue2rgb(p, q, t) {
-  if (t < 0) t += 1;
-  if (t > 1) t -= 1;
-  if (t < 1/6) return p + (q - p) * 6 * t;
-  if (t < 1/2) return q;
-  if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-  return p;
-}
-
-// ── 7. Play / Pause
-function togglePlay() {
-  isPlaying = !isPlaying;
-  updatePlayUI();
-  // Attempt to control iframe (works on Spotify embed via postMessage in some cases)
-  // The autoplay param handles initial play; user play button is visual toggle
-}
-
-function updatePlayUI() {
-  playIcon.innerHTML = isPlaying ? PAUSE_SVG : PLAY_SVG;
-}
-
-playBtn.addEventListener('click', togglePlay);
-
-// ── 8. Navigation
-prevBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
-  loadTrack(currentIndex, true);
-});
-nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % tracks.length;
-  loadTrack(currentIndex, true);
-});
-prevTrackBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
-  loadTrack(currentIndex, true);
-});
-nextTrackBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % tracks.length;
-  loadTrack(currentIndex, true);
-});
-
-// ── 9. Tracklist
+ 
+const vinyl      = document.getElementById('vinyl');
+const tonearm    = document.getElementById('tonearm');
+const playBtn    = document.getElementById('playBtn');
+const playIcon   = document.getElementById('playIcon');
+const vinylCover = document.getElementById('vinylCover');
+const albumBg    = document.getElementById('albumBg');
+const npTitle    = document.getElementById('npTitle');
+const npArtist   = document.getElementById('npArtist');
+const tracklist  = document.getElementById('tracklist');
+const embedWrap  = document.getElementById('spotifyEmbed');
+ 
 function renderTracklist() {
   tracklist.innerHTML = '';
-  tracks.forEach((t, i) => {
+  TRACKS.forEach((t, i) => {
     const li = document.createElement('li');
     li.className = 'track-item';
     li.setAttribute('role', 'listitem');
@@ -279,30 +59,56 @@ function renderTracklist() {
       </div>
       <span class="track-play-icon">▶</span>
     `;
-    li.addEventListener('click', () => loadTrack(i, true));
-    li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') loadTrack(i, true); });
+    li.addEventListener('click', () => {
+      if (currentIndex === i && isPlaying) pausePlayer();
+      else loadTrack(i, true);
+    });
+    li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') li.click(); });
     tracklist.appendChild(li);
   });
 }
-
-function highlightTracklist() {
+ 
+function loadTrack(index, autoplay) {
+  currentIndex = index;
+  const t = TRACKS[index];
+ 
+  vinylCover.src = t.cover;
+  albumBg.style.backgroundImage = `url('${t.cover}')`;
+  npTitle.textContent  = t.name;
+  npArtist.textContent = t.artist;
+ 
+  embedWrap.innerHTML = `
+    <iframe
+      src="https://open.spotify.com/embed/track/${t.id}?utm_source=generator&theme=0"
+      width="100%" height="80" frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy" style="border-radius:12px; display:block;">
+    </iframe>
+  `;
+ 
   document.querySelectorAll('.track-item').forEach((el, i) => {
-    el.classList.toggle('active', i === currentIndex);
+    el.classList.toggle('active', i === index);
   });
+ 
+  if (autoplay) playPlayer();
+  else { isPlaying = false; updateUI(); }
 }
-
-// ── 10. Tab switching
-tabListen.addEventListener('click', () => {
-  tabListen.classList.add('active');
-  tabSongs.classList.remove('active');
-  panelSongs.style.display = 'none';
+ 
+function playPlayer()  { isPlaying = true;  updateUI(); }
+function pausePlayer() { isPlaying = false; updateUI(); }
+ 
+function updateUI() {
+  vinyl.classList.toggle('spinning', isPlaying);
+  tonearm.classList.toggle('playing', isPlaying);
+  playIcon.textContent = isPlaying ? '⏸' : '▶';
+}
+ 
+playBtn.addEventListener('click', () => {
+  if (isPlaying) pausePlayer(); else playPlayer();
 });
-tabSongs.addEventListener('click', () => {
-  tabSongs.classList.add('active');
-  tabListen.classList.remove('active');
-  panelSongs.style.display = 'flex';
-  panelSongs.style.flexDirection = 'column';
+document.getElementById('platter').addEventListener('click', () => {
+  if (isPlaying) pausePlayer(); else playPlayer();
 });
-
-// ── 11. Init
-loadPlaylist();
+ 
+renderTracklist();
+loadTrack(0, false);
