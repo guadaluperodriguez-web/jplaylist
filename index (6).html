@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>playlist ♡</title>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient background blobs -->
+  <div class="ambient-bg" id="ambientBg">
+    <div class="blob blob-1" id="blob1"></div>
+    <div class="blob blob-2" id="blob2"></div>
+    <div class="blob blob-3" id="blob3"></div>
+  </div>
+
+  <div class="app-shell">
+
+    <!-- Minimal header -->
+    <header class="site-header">
+      <p class="title-small">playlist <span class="heart">♡</span></p>
+    </header>
+
+    <!-- Album carousel -->
+    <div class="carousel-zone">
+      <button class="nav-btn nav-prev" id="prevBtn" aria-label="Previous">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel" id="carousel"></div>
+      <button class="nav-btn nav-next" id="nextBtn" aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Now playing info -->
+    <div class="now-playing-zone">
+      <p class="np-title" id="npTitle">–</p>
+      <p class="np-artist" id="npArtist">–</p>
+    </div>
+
+    <!-- Spotify embed (hidden, audio only) -->
+    <div id="spotifyEmbed" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;overflow:hidden;"></div>
+
+    <!-- Player controls -->
+    <div class="controls-bar">
+      <button class="ctrl-btn" id="prevTrackBtn" aria-label="Previous track">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button class="ctrl-btn play-pause-btn" id="playBtn" aria-label="Play / Pause">
+        <svg id="playIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="nextTrackBtn" aria-label="Next track">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="m6 18 8.5-6L6 6v12zm2.5-6L16 6v12z"/><path d="M16 6h2v12h-2z"/></svg>
+      </button>
+    </div>
+
+    <!-- Tab bar -->
+    <nav class="tab-bar">
+      <button class="tab-btn active" data-tab="listen" id="tabListen">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+        <span>Listen Now</span>
+      </button>
+      <button class="tab-btn" data-tab="songs" id="tabSongs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+        <span>Songs</span>
+      </button>
+    </nav>
+
+    <!-- Songs panel -->
+    <div class="panel" id="panelSongs" style="display:none;">
+      <div class="tracklist-wrap">
+        <div id="tracklistLoading" class="loading-msg">loading 🌸</div>
+        <ul class="tracklist" id="tracklist" role="list"></ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
