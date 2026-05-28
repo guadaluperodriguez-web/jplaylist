@@ -5,128 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>thunderstorms ♡</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-/* "My bounty is as boundless as the sea, my love as deep." — R&J */
-:root {
-  --pink:#f7c5d5; --pink-dark:#e8829e; --pink-deep:#c45c7a;
-  --lilac:#e8d5f5; --lilac-mid:#c9a8e8; --lilac-deep:#9b6cbf;
-  --cream:#fff8f0; --cream-dark:#fdeee0;
-  --text:#4a2d3a; --text-muted:#9e7a8a; --white:#ffffff;
-  --shadow:rgba(196,92,122,0.15);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#fff0f5 0%,#f5eeff 50%,#fff5ea 100%);min-height:100vh;color:var(--text);overflow-x:hidden;}
- 
-/* pétalos */
-.petals-bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
-.petal{position:absolute;top:-40px;left:var(--x);font-size:calc(14px * var(--s));animation:fallPetal 14s linear var(--d) infinite;opacity:.4;}
-@keyframes fallPetal{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:.4}90%{opacity:.2}100%{transform:translateY(110vh) rotate(400deg);opacity:0}}
- 
-/* header */
-.site-header{position:relative;z-index:1;text-align:center;padding:3rem 1rem 1.5rem;}
-.subtitle{font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--pink-deep);margin-bottom:.5rem;}
-.title{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.2rem);font-weight:400;color:var(--text);}
-.heart{color:var(--pink-deep);}
-.description{margin-top:.75rem;font-size:14px;color:var(--text-muted);font-style:italic;}
-.hidden-quote{border-bottom:1px dotted var(--pink-dark);cursor:default;}
- 
-/* layout */
-.main-layout{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:960px;margin:0 auto;padding:1rem 2rem 2rem;}
-@media(max-width:680px){.main-layout{grid-template-columns:1fr;}}
- 
-/* player */
-.player-section{display:flex;flex-direction:column;align-items:center;gap:1.25rem;}
-.turntable-wrap{position:relative;width:280px;height:280px;}
-.album-bg{position:absolute;inset:0;border-radius:20px;background:var(--cream-dark) center/cover;filter:blur(10px) brightness(.8) saturate(1.3);transform:scale(1.06);transition:background-image .7s ease;z-index:0;}
-.turntable{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.tt-base{position:relative;width:240px;height:220px;background:linear-gradient(160deg,#fff5f8 0%,#fce8f0 100%);border-radius:24px;border:2px solid var(--pink);box-shadow:0 8px 32px var(--shadow),inset 0 1px 0 rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;}
- 
-/* brazo */
-.tonearm{position:absolute;top:18px;right:22px;width:64px;height:8px;background:linear-gradient(90deg,var(--lilac-deep),var(--lilac-mid));border-radius:4px;transform-origin:right center;transform:rotate(-32deg);transition:transform .9s cubic-bezier(.4,0,.2,1);z-index:5;}
-.tonearm::after{content:'';position:absolute;left:-5px;top:50%;transform:translateY(-50%);width:9px;height:9px;background:var(--pink-deep);border-radius:50%;}
-.tonearm.playing{transform:rotate(-10deg);}
- 
-/* vinilo */
-.platter{width:152px;height:152px;background:radial-gradient(circle,#f0e0ea 0%,#e8c8d8 100%);border-radius:50%;border:3px solid var(--pink);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px var(--shadow);cursor:pointer;}
-.vinyl{width:132px;height:132px;background:repeating-radial-gradient(circle at center,#2d1a24 0px,#2d1a24 2px,#3d2433 3px,#3d2433 5px);border-radius:50%;display:flex;align-items:center;justify-content:center;}
-.vinyl.spinning{animation:spinVinyl 3s linear infinite;}
-@keyframes spinVinyl{to{transform:rotate(360deg)}}
-.vinyl-center{position:relative;width:48px;height:48px;display:flex;align-items:center;justify-content:center;}
-.vinyl-label{width:46px;height:46px;border-radius:50%;overflow:hidden;background:var(--pink);border:2px solid var(--pink-dark);}
-.vinyl-label img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
-.vinyl-hole{position:absolute;width:8px;height:8px;background:#1a0f16;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;}
- 
-/* play btn */
-.play-btn{position:absolute;bottom:14px;right:16px;width:36px;height:36px;border-radius:50%;border:2px solid var(--pink-dark);background:var(--white);color:var(--pink-deep);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .15s;box-shadow:0 2px 8px var(--shadow);}
-.play-btn:hover{background:var(--pink);transform:scale(1.1);}
-.play-btn:active{transform:scale(.95);}
-.tt-feet{display:flex;gap:120px;margin-top:4px;}
-.foot{width:18px;height:8px;background:var(--pink);border-radius:0 0 6px 6px;border:1.5px solid var(--pink-dark);border-top:none;}
-.tt-label{font-size:10px;color:var(--text-muted);letter-spacing:.1em;margin-top:6px;}
- 
-/* now playing */
-.now-playing{text-align:center;background:rgba(255,255,255,.7);border:1px solid var(--pink);border-radius:16px;padding:.75rem 1.5rem;backdrop-filter:blur(8px);min-width:230px;}
-.np-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--pink-deep);margin-bottom:4px;}
-.np-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:230px;}
-.np-artist{font-size:12px;color:var(--text-muted);margin-top:2px;}
-.spotify-embed-wrap{width:100%;max-width:280px;}
- 
-/* tracklist */
-.tracklist-section{background:rgba(255,255,255,.6);border:1px solid var(--pink);border-radius:20px;padding:1.5rem;backdrop-filter:blur(8px);max-height:540px;overflow-y:auto;}
-.tracklist-section::-webkit-scrollbar{width:4px;}
-.tracklist-section::-webkit-scrollbar-thumb{background:var(--pink-dark);border-radius:2px;}
-.tracklist-header{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;}
-.tracklist-header h2{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--text);flex:1;text-align:center;}
-.tracklist-deco{color:var(--pink-deep);font-size:14px;}
-.tracklist{list-style:none;display:flex;flex-direction:column;gap:4px;}
-.track-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;cursor:pointer;transition:background .2s,transform .15s;border:1px solid transparent;}
-.track-item:hover{background:rgba(247,197,213,.35);border-color:var(--pink);transform:translateX(4px);}
-.track-item.active{background:rgba(247,197,213,.5);border-color:var(--pink-dark);}
-.track-num{font-size:11px;color:var(--text-muted);width:18px;text-align:right;flex-shrink:0;}
-.track-cover{width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0;border:1px solid var(--pink);}
-.track-info{flex:1;overflow:hidden;}
-.track-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.track-artist{font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.track-play-icon{font-size:12px;color:var(--pink-deep);opacity:0;transition:opacity .2s;}
-.track-item:hover .track-play-icon,.track-item.active .track-play-icon{opacity:1;}
- 
-/* legal */
-.legal-section{position:relative;z-index:1;max-width:960px;margin:0 auto 3rem;padding:0 2rem;}
-.legal-inner{background:rgba(255,255,255,.65);border:1px solid var(--lilac-mid);border-radius:20px;padding:2rem 2.5rem;backdrop-filter:blur(10px);}
-.legal-icon{font-size:28px;margin-bottom:.75rem;}
-.legal-inner h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:.75rem;}
-.legal-intro{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem;}
-.legal-intro strong{color:var(--text);font-weight:500;}
-.legal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem;}
-.legal-card{background:rgba(255,255,255,.7);border:1px solid var(--pink);border-radius:14px;padding:1rem 1.25rem;display:flex;flex-direction:column;gap:6px;}
-.legal-card-icon{font-size:20px;}
-.legal-card strong{font-size:13px;font-weight:500;color:var(--text);}
-.legal-card p{font-size:12px;color:var(--text-muted);line-height:1.6;}
-.legal-card a{color:var(--pink-deep);text-decoration:underline;}
-.legal-note{font-size:12px;color:var(--text-muted);font-style:italic;border-top:1px solid var(--pink);padding-top:1rem;margin-top:0;}
- 
-/* footer */
-.site-footer{position:relative;z-index:1;text-align:center;padding:1.5rem;font-size:12px;color:var(--text-muted);}
-.footer-heart{color:var(--pink-deep);}
-.footer-secret{cursor:default;font-size:14px;opacity:.35;transition:opacity .3s;position:relative;}
-.footer-secret:hover{opacity:1;color:var(--lilac-deep);}
-.footer-secret:hover::after{content:attr(title);position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);background:rgba(155,108,191,.92);color:white;font-style:italic;font-size:12px;padding:6px 14px;border-radius:20px;white-space:nowrap;pointer-events:none;}
-</style>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
  
-<!-- "What's in a name? That which we call a rose by any other name would smell as sweet." — W. Shakespeare, R&J II.ii -->
- 
-<div class="petals-bg" aria-hidden="true">
-  <span class="petal" style="--d:0s;--x:8%;--s:1">🌸</span>
-  <span class="petal" style="--d:2s;--x:22%;--s:.7">🌸</span>
-  <span class="petal" style="--d:4s;--x:47%;--s:.9">🌸</span>
-  <span class="petal" style="--d:1s;--x:68%;--s:1.1">🌸</span>
-  <span class="petal" style="--d:3s;--x:85%;--s:.6">🌸</span>
-  <span class="petal" style="--d:5s;--x:38%;--s:.8">🌸</span>
-  <span class="petal" style="--d:6.5s;--x:58%;--s:1">🌸</span>
-  <span class="petal" style="--d:7s;--x:92%;--s:.75">🌸</span>
+<!-- Fondo dinámico que late como corazón -->
+<div class="heartbeat-bg" aria-hidden="true">
+  <div class="hb-layer hb-1"></div>
+  <div class="hb-layer hb-2"></div>
+  <div class="hb-layer hb-3"></div>
 </div>
+ 
+<!-- Pétalos de lavanda + abejas -->
+<div class="petals-bg" aria-hidden="true" id="petalsBg"></div>
  
 <header class="site-header">
   <p class="subtitle">a playlist for someone special</p>
@@ -143,25 +34,101 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#fff0f5 
       <div class="album-bg" id="albumBg"></div>
       <div class="turntable">
         <div class="tt-base">
-          <div class="tonearm" id="tonearm"></div>
+ 
+          <!-- Tocadiscos ilustrado SVG -->
+          <svg class="tt-deco" viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Base textura madera -->
+            <defs>
+              <linearGradient id="woodGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fff0f5"/>
+                <stop offset="40%" stop-color="#fce0ec"/>
+                <stop offset="100%" stop-color="#f5c8d8"/>
+              </linearGradient>
+              <linearGradient id="armGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#9b6cbf"/>
+                <stop offset="100%" stop-color="#c9a8e8"/>
+              </linearGradient>
+              <radialGradient id="platGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f9e0ec"/>
+                <stop offset="100%" stop-color="#e8b8d0"/>
+              </radialGradient>
+              <!-- Brillo suave en la tapa -->
+              <linearGradient id="lidShine" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </linearGradient>
+              <filter id="softShadow">
+                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(196,92,122,0.25)"/>
+              </filter>
+            </defs>
+ 
+            <!-- Cuerpo principal del tocadiscos -->
+            <rect x="4" y="8" width="232" height="204" rx="20" fill="url(#woodGrad)" filter="url(#softShadow)"/>
+            <!-- Borde superior brillante -->
+            <rect x="4" y="8" width="232" height="18" rx="12" fill="url(#lidShine)"/>
+            <!-- Líneas decorativas de textura -->
+            <line x1="14" y1="30" x2="226" y2="30" stroke="rgba(196,92,122,0.12)" stroke-width="1"/>
+            <line x1="14" y1="34" x2="226" y2="34" stroke="rgba(196,92,122,0.07)" stroke-width="0.5"/>
+            <!-- Panel izquierdo - controles decorativos -->
+            <rect x="14" y="44" width="44" height="130" rx="10" fill="rgba(247,197,213,0.3)" stroke="rgba(232,130,158,0.35)" stroke-width="1"/>
+            <!-- Botoncitos decorativos -->
+            <circle cx="36" cy="62" r="7" fill="rgba(196,92,122,0.15)" stroke="#e8829e" stroke-width="1.2"/>
+            <circle cx="36" cy="62" r="3" fill="#e8829e" opacity="0.6"/>
+            <rect x="24" y="80" width="24" height="3" rx="1.5" fill="rgba(155,108,191,0.4)"/>
+            <rect x="24" y="87" width="18" height="3" rx="1.5" fill="rgba(155,108,191,0.3)"/>
+            <rect x="24" y="94" width="21" height="3" rx="1.5" fill="rgba(155,108,191,0.25)"/>
+            <!-- Pequeño indicador led -->
+            <circle cx="36" cy="108" r="4" fill="#f7c5d5" stroke="#e8829e" stroke-width="1"/>
+            <circle cx="36" cy="108" r="2" fill="#ff9eb5" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Marca decorativa -->
+            <text x="36" y="140" text-anchor="middle" font-size="5" fill="rgba(155,108,191,0.5)" font-family="serif">✿</text>
+            <text x="36" y="148" text-anchor="middle" font-size="4" fill="rgba(196,92,122,0.4)" font-family="sans-serif">HiFi</text>
+          </svg>
+ 
+          <!-- Brazo tonearm HTML (animado por JS) -->
+          <div class="tonearm" id="tonearm">
+            <div class="tonearm-shine"></div>
+            <div class="tonearm-needle"></div>
+          </div>
+ 
+          <!-- Vinilo / plato -->
           <div class="platter" id="platter">
+            <div class="vinyl-shadow"></div>
             <div class="vinyl" id="vinyl">
+              <!-- Grooves SVG internos -->
+              <svg class="vinyl-grooves" viewBox="0 0 132 132" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="66" cy="66" r="64" fill="#2a1520"/>
+                <!-- Surcos con variación de opacidad -->
+                <circle cx="66" cy="66" r="58" fill="none" stroke="#3d2433" stroke-width="2.2"/>
+                <circle cx="66" cy="66" r="53" fill="none" stroke="#341d2b" stroke-width="1.5"/>
+                <circle cx="66" cy="66" r="48" fill="none" stroke="#3d2433" stroke-width="1.8"/>
+                <circle cx="66" cy="66" r="43" fill="none" stroke="#2f1a28" stroke-width="1.5"/>
+                <circle cx="66" cy="66" r="38" fill="none" stroke="#3d2433" stroke-width="1.8"/>
+                <circle cx="66" cy="66" r="33" fill="none" stroke="#341d2b" stroke-width="1.5"/>
+                <!-- Brillo lateral del vinilo -->
+                <path d="M66,4 A62,62 0 0,1 128,66" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
+                <path d="M66,128 A62,62 0 0,1 4,66" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="4"/>
+              </svg>
+              <!-- Label central -->
               <div class="vinyl-center">
                 <div class="vinyl-label">
-                  <img id="vinylCover" src="" alt="cover"/>
+                  <img id="vinylCover" src="" alt="cover" referrerpolicy="no-referrer"/>
+                  <!-- Overlay brillante -->
+                  <div class="label-shine"></div>
                 </div>
                 <div class="vinyl-hole"></div>
               </div>
             </div>
           </div>
-          <button class="play-btn" id="playBtn" aria-label="Play/Pause">
-            <span id="playIcon">▶</span>
-          </button>
-        </div>
+ 
+        </div><!-- /.tt-base -->
         <div class="tt-feet"><span class="foot"></span><span class="foot"></span></div>
         <div class="tt-label">✿ my heart on vinyl ✿</div>
       </div>
     </div>
+ 
     <div class="now-playing">
       <p class="np-label">now playing</p>
       <p class="np-title" id="npTitle">She's Thunderstorms</p>
@@ -183,7 +150,7 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#fff0f5 
 <section class="legal-section">
   <div class="legal-inner">
     <div class="legal-icon">⚖️</div>
-    <h3>about this project & copyright</h3>
+    <h3>about this project &amp; copyright</h3>
     <p class="legal-intro">
       This page was built as a personal creative project using HTML, CSS and JavaScript.
       Music is streamed exclusively through <strong>official Spotify embed players</strong> —
@@ -194,7 +161,7 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#fff0f5 
       <div class="legal-card">
         <span class="legal-card-icon">✅</span>
         <strong>What this site does</strong>
-        <p>Displays song names, artists and album artwork — all publicly available metadata. Uses Spotify's official embed widget to play 30-second previews directly from Spotify's servers.</p>
+        <p>Displays song names, artists and album artwork — all publicly available metadata. Uses Spotify's official embed widget to play previews directly from Spotify's servers.</p>
       </div>
       <div class="legal-card">
         <span class="legal-card-icon">🚫</span>
@@ -214,116 +181,10 @@ body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#fff0f5 
 </section>
  
 <footer class="site-footer">
-  <p>made with <span class="footer-heart">♡</span> · html, css & js · spotify embed api · <span class="footer-secret" title="But soft, what light through yonder window breaks?">☽</span></p>
+  <p>made with <span class="footer-heart">♡</span> · html, css &amp; js · spotify embed api · <span class="footer-secret" title="But soft, what light through yonder window breaks?">☽</span></p>
 </footer>
  
-<script>
-// "Did my heart love till now? Forswear it, sight! For I ne'er saw true beauty till this night." — W. Shakespeare
- 
-const TRACKS = [
-  { id:"5xw2cHVLw1rlDPp3cL9Zuv", name:"She's Thunderstorms",                       artist:"Arctic Monkeys",             cover:"https://i.scdn.co/image/ab67616d00004851cb44038b22f3d8a5e4e62d5a" },
-  { id:"7LbUv7w2z7rEbNqp1uIL9U", name:"Fallingforyou",                              artist:"The 1975",                   cover:"https://i.scdn.co/image/ab67616d00004851592889d4d323785856f18770" },
-  { id:"254bXAqt3zP6P50BdQvEsq", name:"Everywhere (2017 Remaster)",                 artist:"Fleetwood Mac",              cover:"https://i.scdn.co/image/ab67616d00004851aaba065944cd82a6f15c86b6" },
-  { id:"3SWGtKHaCFEUqfm9ydUFVw", name:"Disaster",                                   artist:"Conan Gray",                 cover:"https://i.scdn.co/image/ab67616d0000485160a89b781c62ffe2136e4396" },
-  { id:"45S5WTQEGOB1VHr1Q4FuPl", name:"Golden",                                     artist:"Harry Styles",               cover:"https://i.scdn.co/image/ab67616d000048519c72b249fcaa04d074c1dfcd" },
-  { id:"4QlzkaRHtU8gAdwqjWmO8n", name:"Friday I'm In Love",                        artist:"The Cure",                   cover:"https://i.scdn.co/image/ab67616d000048514ae1c4c5c45aabe565499163" },
-  { id:"5XeFesFbtLpXzIVDNQP22n", name:"I Wanna Be Yours",                           artist:"Arctic Monkeys",             cover:"https://i.scdn.co/image/ab67616d00004851bb54dde68cd23e2a268ae0f5" },
-  { id:"0A1JLUlkZkp2EFrosoNQi0", name:"Labyrinth",                                  artist:"Taylor Swift",               cover:"https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
-  { id:"4e3ZNTAV6PCrdYMUrUlMpQ", name:"Electric Touch (feat. Fall Out Boy)",        artist:"Taylor Swift & Fall Out Boy", cover:"https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
-  { id:"3MytWN8L7shNYzGl4tAKRp", name:"Sparks Fly (Taylor's Version)",              artist:"Taylor Swift",               cover:"https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
-  { id:"0gZGUAO42F1HmzZWHNPGAu", name:"Risk",                                       artist:"Gracie Abrams",              cover:"https://i.scdn.co/image/ab67616d000048516e2101520787791370f4a96b" },
-  { id:"4zmKGsrXjLmljb5fTaBTot", name:"Snow On The Beach (feat. Lana Del Rey)",     artist:"Taylor Swift & Lana Del Rey",cover:"https://i.scdn.co/image/ab67616d00004851fa747621a53c8e2cc436dee0" },
-  { id:"5TTGoX70AFrTvuEtqHK37S", name:"No. 1 Party Anthem",                         artist:"Arctic Monkeys",             cover:"https://i.scdn.co/image/ab67616d000048514ae1c4c5c45aabe565499163" },
-  { id:"5xA5MggKc3aQxuOzNzPUWB", name:"Apple Cider",                                artist:"beabadoobee",                cover:"https://i.scdn.co/image/ab67616d00004851ceca3ef39ab8f9b59acff394" },
-  { id:"3bnVBN67NBEzedqQuWrpP4", name:"Tear in My Heart",                           artist:"Twenty One Pilots",          cover:"https://i.scdn.co/image/ab67616d000048512df0d98a423025032d0db1f7" },
-  { id:"70L6nHORQsblY813yNqUR3", name:"Cherry Waves",                               artist:"Deftones",                   cover:"https://i.scdn.co/image/ab67616d00004851c869fa3b4e0ce4dd9818a40e" },
-  { id:"0pfpeTGQOWlGp6YUUbBD42", name:"Bewitched",                                  artist:"Laufey",                     cover:"https://i.scdn.co/image/ab67616d0000485174c732f8aa0e0ccbb3d17d96" },
-  { id:"77sMIMlNaSURUAXq5coCxE", name:"Fearless (Taylor's Version)",                artist:"Taylor Swift",               cover:"https://i.scdn.co/image/ab67616d00004851a48964b5d9a3d6968ae3e0de" },
-  { id:"55mQhobuwtY7lfLAXylg1k", name:"You Make Loving Fun (2004 Remaster)",        artist:"Fleetwood Mac",              cover:"https://i.scdn.co/image/ab67616d00004851e52a59a28efa4773dd2bfe1b" },
-  { id:"7Mts0OfPorF4iwOomvfqn1", name:"So High School",                             artist:"Taylor Swift",               cover:"https://i.scdn.co/image/ab67616d000048518ecc33f195df6aa257c39eaa" },
-  { id:"3yNJkriPzWjkkDAWHIAVUq", name:"Ours (Taylor's Version)",                    artist:"Taylor Swift",               cover:"https://i.scdn.co/image/ab67616d000048510b04da4f224b51ff86e0a481" },
-  { id:"6jgkEbmQ2F2onEqsEhiliL", name:"My Kind of Woman",                           artist:"Mac DeMarco",                cover:"https://i.scdn.co/image/ab67616d000048519d377496c6bc8724b521222d" },
-  { id:"7I1kle4TNmkfednJDKo8GR", name:"If You Want To",                             artist:"beabadoobee",                cover:"https://i.scdn.co/image/ab67616d00004851fe11583497b2a332995b88ed" },
-  { id:"2eAvDnpXP5W0cVtiI0PUxV", name:"Dandelions",                                 artist:"Ruth B.",                    cover:"https://i.scdn.co/image/ab67616d00004851b09403f05bc0c306cf96990f" },
-  { id:"4THoSHxiabL1rd59iVWu2T", name:"Cold Coffee",                                artist:"Ed Sheeran",                 cover:"https://i.scdn.co/image/ab67616d000048512fec3ad10ab2f3a637e7a127" }
-];
- 
-let currentIndex = 0;
-let isPlaying = false;
- 
-const vinyl      = document.getElementById('vinyl');
-const tonearm    = document.getElementById('tonearm');
-const playBtn    = document.getElementById('playBtn');
-const playIcon   = document.getElementById('playIcon');
-const vinylCover = document.getElementById('vinylCover');
-const albumBg    = document.getElementById('albumBg');
-const npTitle    = document.getElementById('npTitle');
-const npArtist   = document.getElementById('npArtist');
-const tracklist  = document.getElementById('tracklist');
-const embedWrap  = document.getElementById('spotifyEmbed');
- 
-function renderTracklist() {
-  tracklist.innerHTML = '';
-  TRACKS.forEach((t, i) => {
-    const li = document.createElement('li');
-    li.className = 'track-item';
-    li.setAttribute('tabindex', '0');
-    li.innerHTML =
-      '<span class="track-num">' + (i+1) + '</span>' +
-      '<img class="track-cover" src="' + t.cover + '" alt="' + t.name + '" loading="lazy" referrerpolicy="no-referrer"/>' +
-      '<div class="track-info">' +
-        '<div class="track-name">' + t.name + '</div>' +
-        '<div class="track-artist">' + t.artist + '</div>' +
-      '</div>' +
-      '<span class="track-play-icon">▶</span>';
-    li.addEventListener('click', function() {
-      if (currentIndex === i && isPlaying) pausePlayer();
-      else loadTrack(i, true);
-    });
-    li.addEventListener('keydown', function(e) { if(e.key==='Enter'||e.key===' ') li.click(); });
-    tracklist.appendChild(li);
-  });
-}
- 
-function loadTrack(index, autoplay) {
-  currentIndex = index;
-  var t = TRACKS[index];
-  vinylCover.src = t.cover;
-  vinylCover.setAttribute('referrerpolicy','no-referrer');
-  albumBg.style.backgroundImage = "url('" + t.cover + "')";
-  npTitle.textContent  = t.name;
-  npArtist.textContent = t.artist;
-  embedWrap.innerHTML =
-    '<iframe src="https://open.spotify.com/embed/track/' + t.id + '?utm_source=generator&theme=0" ' +
-    'width="100%" height="80" frameborder="0" ' +
-    'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" ' +
-    'loading="lazy" style="border-radius:12px;display:block;"></iframe>';
-  document.querySelectorAll('.track-item').forEach(function(el, i) {
-    el.classList.toggle('active', i === index);
-  });
-  if (autoplay) playPlayer();
-  else { isPlaying = false; updateUI(); }
-}
- 
-function playPlayer()  { isPlaying = true;  updateUI(); }
-function pausePlayer() { isPlaying = false; updateUI(); }
- 
-function updateUI() {
-  vinyl.classList.toggle('spinning', isPlaying);
-  tonearm.classList.toggle('playing', isPlaying);
-  playIcon.textContent = isPlaying ? '⏸' : '▶';
-}
- 
-playBtn.addEventListener('click', function() {
-  if (isPlaying) pausePlayer(); else playPlayer();
-});
-document.getElementById('platter').addEventListener('click', function() {
-  if (isPlaying) pausePlayer(); else playPlayer();
-});
- 
-renderTracklist();
-loadTrack(0, false);
-</script>
+<script src="app.js"></script>
 </body>
 </html>
  
