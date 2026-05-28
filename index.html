@@ -9,14 +9,12 @@
 </head>
 <body>
  
-<!-- Fondo dinámico que late como corazón -->
 <div class="heartbeat-bg" aria-hidden="true">
   <div class="hb-layer hb-1"></div>
   <div class="hb-layer hb-2"></div>
   <div class="hb-layer hb-3"></div>
 </div>
  
-<!-- Pétalos de lavanda + abejas -->
 <div class="petals-bg" aria-hidden="true" id="petalsBg"></div>
  
 <header class="site-header">
@@ -30,104 +28,68 @@
  
 <main class="main-layout">
   <section class="player-section">
+ 
     <div class="turntable-wrap">
       <div class="album-bg" id="albumBg"></div>
       <div class="turntable">
-        <div class="tt-base">
  
-          <!-- Tocadiscos ilustrado SVG -->
-          <svg class="tt-deco" viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Base textura madera -->
-            <defs>
-              <linearGradient id="woodGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#fff0f5"/>
-                <stop offset="40%" stop-color="#fce0ec"/>
-                <stop offset="100%" stop-color="#f5c8d8"/>
-              </linearGradient>
-              <linearGradient id="armGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#9b6cbf"/>
-                <stop offset="100%" stop-color="#c9a8e8"/>
-              </linearGradient>
-              <radialGradient id="platGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#f9e0ec"/>
-                <stop offset="100%" stop-color="#e8b8d0"/>
-              </radialGradient>
-              <!-- Brillo suave en la tapa -->
-              <linearGradient id="lidShine" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-              </linearGradient>
-              <filter id="softShadow">
-                <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(196,92,122,0.25)"/>
-              </filter>
-            </defs>
+        <!-- Caja principal del tocadiscos -->
+        <div class="tt-base-outer">
  
-            <!-- Cuerpo principal del tocadiscos -->
-            <rect x="4" y="8" width="232" height="204" rx="20" fill="url(#woodGrad)" filter="url(#softShadow)"/>
-            <!-- Borde superior brillante -->
-            <rect x="4" y="8" width="232" height="18" rx="12" fill="url(#lidShine)"/>
-            <!-- Líneas decorativas de textura -->
-            <line x1="14" y1="30" x2="226" y2="30" stroke="rgba(196,92,122,0.12)" stroke-width="1"/>
-            <line x1="14" y1="34" x2="226" y2="34" stroke="rgba(196,92,122,0.07)" stroke-width="0.5"/>
-            <!-- Panel izquierdo - controles decorativos -->
-            <rect x="14" y="44" width="44" height="130" rx="10" fill="rgba(247,197,213,0.3)" stroke="rgba(232,130,158,0.35)" stroke-width="1"/>
-            <!-- Botoncitos decorativos -->
-            <circle cx="36" cy="62" r="7" fill="rgba(196,92,122,0.15)" stroke="#e8829e" stroke-width="1.2"/>
-            <circle cx="36" cy="62" r="3" fill="#e8829e" opacity="0.6"/>
-            <rect x="24" y="80" width="24" height="3" rx="1.5" fill="rgba(155,108,191,0.4)"/>
-            <rect x="24" y="87" width="18" height="3" rx="1.5" fill="rgba(155,108,191,0.3)"/>
-            <rect x="24" y="94" width="21" height="3" rx="1.5" fill="rgba(155,108,191,0.25)"/>
-            <!-- Pequeño indicador led -->
-            <circle cx="36" cy="108" r="4" fill="#f7c5d5" stroke="#e8829e" stroke-width="1"/>
-            <circle cx="36" cy="108" r="2" fill="#ff9eb5" opacity="0.8">
-              <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
-            </circle>
-            <!-- Marca decorativa -->
-            <text x="36" y="140" text-anchor="middle" font-size="5" fill="rgba(155,108,191,0.5)" font-family="serif">✿</text>
-            <text x="36" y="148" text-anchor="middle" font-size="4" fill="rgba(196,92,122,0.4)" font-family="sans-serif">HiFi</text>
-          </svg>
- 
-          <!-- Brazo tonearm HTML (animado por JS) -->
-          <div class="tonearm" id="tonearm">
-            <div class="tonearm-shine"></div>
-            <div class="tonearm-needle"></div>
+          <!-- Panel izquierdo decorativo -->
+          <div class="tt-side-panel">
+            <div class="tt-knob"><div class="tt-knob-inner"></div></div>
+            <div class="tt-led-wrap"><div class="tt-led"></div></div>
+            <div class="tt-sliders">
+              <div class="tt-slider" style="width:22px"></div>
+              <div class="tt-slider" style="width:16px"></div>
+              <div class="tt-slider" style="width:19px"></div>
+            </div>
+            <div class="tt-brand">HiFi</div>
+            <div class="tt-deco-star">✿</div>
           </div>
  
-          <!-- Vinilo / plato -->
-          <div class="platter" id="platter">
-            <div class="vinyl-shadow"></div>
-            <div class="vinyl" id="vinyl">
-              <!-- Grooves SVG internos -->
-              <svg class="vinyl-grooves" viewBox="0 0 132 132" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="66" cy="66" r="64" fill="#2a1520"/>
-                <!-- Surcos con variación de opacidad -->
-                <circle cx="66" cy="66" r="58" fill="none" stroke="#3d2433" stroke-width="2.2"/>
-                <circle cx="66" cy="66" r="53" fill="none" stroke="#341d2b" stroke-width="1.5"/>
-                <circle cx="66" cy="66" r="48" fill="none" stroke="#3d2433" stroke-width="1.8"/>
-                <circle cx="66" cy="66" r="43" fill="none" stroke="#2f1a28" stroke-width="1.5"/>
-                <circle cx="66" cy="66" r="38" fill="none" stroke="#3d2433" stroke-width="1.8"/>
-                <circle cx="66" cy="66" r="33" fill="none" stroke="#341d2b" stroke-width="1.5"/>
-                <!-- Brillo lateral del vinilo -->
-                <path d="M66,4 A62,62 0 0,1 128,66" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
-                <path d="M66,128 A62,62 0 0,1 4,66" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="4"/>
-              </svg>
-              <!-- Label central -->
-              <div class="vinyl-center">
-                <div class="vinyl-label">
-                  <img id="vinylCover" src="" alt="cover" referrerpolicy="no-referrer"/>
-                  <!-- Overlay brillante -->
-                  <div class="label-shine"></div>
+          <!-- Zona del plato -->
+          <div class="tt-main">
+            <!-- Brazo -->
+            <div class="tonearm" id="tonearm">
+              <div class="tonearm-shine"></div>
+              <div class="tonearm-pivot"></div>
+              <div class="tonearm-needle"></div>
+            </div>
+ 
+            <!-- Plato + vinilo -->
+            <div class="platter" id="platter">
+              <div class="platter-ring"></div>
+              <div class="vinyl" id="vinyl">
+                <svg class="vinyl-grooves" viewBox="0 0 138 138" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="69" cy="69" r="68" fill="#271220"/>
+                  <circle cx="69" cy="69" r="63" fill="none" stroke="#3a1a2c" stroke-width="2"/>
+                  <circle cx="69" cy="69" r="58" fill="none" stroke="#2e1525" stroke-width="1.5"/>
+                  <circle cx="69" cy="69" r="53" fill="none" stroke="#3a1a2c" stroke-width="2"/>
+                  <circle cx="69" cy="69" r="48" fill="none" stroke="#2e1525" stroke-width="1.5"/>
+                  <circle cx="69" cy="69" r="43" fill="none" stroke="#3a1a2c" stroke-width="1.8"/>
+                  <circle cx="69" cy="69" r="38" fill="none" stroke="#2e1525" stroke-width="1.5"/>
+                  <circle cx="69" cy="69" r="33" fill="none" stroke="#3a1a2c" stroke-width="1.5"/>
+                  <path d="M69,3 A66,66 0 0,1 135,69" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+                </svg>
+                <div class="vinyl-center">
+                  <div class="vinyl-label">
+                    <img id="vinylCover" src="" alt="cover" referrerpolicy="no-referrer"/>
+                    <div class="label-shine"></div>
+                  </div>
+                  <div class="vinyl-hole"></div>
                 </div>
-                <div class="vinyl-hole"></div>
               </div>
             </div>
-          </div>
+          </div><!-- /.tt-main -->
  
-        </div><!-- /.tt-base -->
+        </div><!-- /.tt-base-outer -->
+ 
         <div class="tt-feet"><span class="foot"></span><span class="foot"></span></div>
         <div class="tt-label">✿ my heart on vinyl ✿</div>
-      </div>
-    </div>
+      </div><!-- /.turntable -->
+    </div><!-- /.turntable-wrap -->
  
     <div class="now-playing">
       <p class="np-label">now playing</p>
@@ -166,17 +128,15 @@
       <div class="legal-card">
         <span class="legal-card-icon">🚫</span>
         <strong>What this site does NOT do</strong>
-        <p>No audio is hosted or downloaded. No copyrighted content is reproduced. No DRM is bypassed. The embed is identical to pasting a YouTube video on a webpage.</p>
+        <p>No audio is hosted or downloaded. No copyrighted content is reproduced. No DRM is bypassed.</p>
       </div>
       <div class="legal-card">
         <span class="legal-card-icon">📄</span>
         <strong>Legal basis</strong>
-        <p>Spotify embeds are explicitly permitted under <a href="https://developer.spotify.com/documentation/embeds" target="_blank" rel="noopener">Spotify's Embed API terms</a>. Album art is served directly from Spotify's CDN via their API.</p>
+        <p>Spotify embeds are explicitly permitted under <a href="https://developer.spotify.com/documentation/embeds" target="_blank" rel="noopener">Spotify's Embed API terms</a>.</p>
       </div>
     </div>
-    <p class="legal-note">
-      This project is not affiliated with or endorsed by Spotify AB. All music rights belong to their respective artists and labels. Built with love for portfolio purposes. 🌸
-    </p>
+    <p class="legal-note">Not affiliated with Spotify AB. All music rights belong to their respective artists and labels. Built with love. 🌸</p>
   </div>
 </section>
  
